@@ -122,7 +122,7 @@
             margin-top: 10px;
         }
 
-        /* ⭐ Quote Box */
+        /* Quote Box */
         .quote-box {
             background: #f9f9f9;
             padding: 20px;
@@ -152,7 +152,7 @@
             font-size: 1.3rem;
         }
 
-        /* ⭐ TIPS & TRICKS */
+        /* Tips & Tricks */
         .tips-list {
             font-size: 1.5rem;
             width: 60%;
@@ -161,7 +161,7 @@
             line-height: 2.2rem;
         }
 
-        /* ⭐ PUZZLE OF THE DAY */
+        /* Puzzle of the Day */
         .puzzle-box {
             background: #f9f9f9;
             padding: 20px;
@@ -358,6 +358,7 @@
             }
         }
 
+        // Show home on load
         goToSection('home');
 
         // Floating pawn background
@@ -374,7 +375,7 @@
 
         setInterval(spawnPawn, 500);
 
-        // ⭐ Quote of the Day
+        // Quote of the Day
         const quotes = [
             "Chess is the gymnasium of the mind. – Blaise Pascal",
             "In life, as in chess, forethought wins. – Charles Buxton",
@@ -400,7 +401,7 @@
             document.getElementById("extra-quote").textContent = extra;
         }
 
-        // ⭐ PUZZLE OF THE DAY (simple images, not clickable)
+        // Puzzle of the Day
         const puzzles = [
             {
                 img: "https://images.chesscomfiles.com/uploads/v1/images/learn-chess/puzzles/basic-mate-in-1.png",
@@ -447,3 +448,21 @@
                 desc: "White to move and use a discovered attack.",
                 solution: "1. Bd5+! followed by Qxd7 — winning material."
             }
+        ];
+
+        function loadPuzzleOfTheDay() {
+            const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
+
+            document.getElementById("puzzle-image").src = puzzle.img;
+            document.getElementById("puzzle-description").textContent = puzzle.desc;
+            document.getElementById("puzzle-solution").textContent = puzzle.solution;
+
+            document.getElementById("puzzle-solution").style.display = "none";
+        }
+
+        function showSolution() {
+            document.getElementById("puzzle-solution").style.display = "block";
+        }
+    </script>
+</body>
+</html>
