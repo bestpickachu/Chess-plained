@@ -1,1 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chess Xplained</title>
+
+    <style>
+        body {
+            background: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Floating pawn background */
+        #pawn-container img {
+            position: absolute;
+            width: 50px;
+            opacity: 0.5;
+            animation: float-bg 12s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes float-bg {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-150vh) rotate(360deg); }
+        }
+
+        /* Floating pawn foreground */
+        .floating-pawn {
+            position: fixed;
+            width: 60px;
+            top: 20px;
+            right: 20px;
+            animation: float 4s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #d3d3d3;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            display: inline;
+            margin: 0 25px;
+        }
+
+        .navbar ul li a {
+            font-size: 1.3rem;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+        }
+
+        /* HOME SCREEN */
+        .home-screen {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-title {
+            font-size: 5rem;
+            font-weight: bold;
+            font-family: "Brush Script MT", cursive;
+            text-shadow: 0 0 20px black;
+        }
+
+        /* Page Sections */
+        .page {
+            padding: 100px 50px 50px;
+            display: none;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-family: "Brush Script MT", cursive;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .placeholder {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        /* Lesson Info Box */
+        .info-box {
+            background: #f0f0f0;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .price-box {
+            background: #fff;
+            padding: 10px;
+            border: 2px solid black;
+            margin-top: 10px;
+        }
+
+        /* ⭐ Quote Box */
+        .quote-box {
+            background: #f9f9f9;
+            padding: 20px;
+            width: 450px;
+            margin: 30px auto;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid black;
+        }
+
+        .extra-quote {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #444;
+        }
+
+        /* Scores */
+        .category {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 40px;
+        }
+
+        .list {
+            font-size: 1.3rem;
+        }
+
+        /* ⭐ TIPS & TRICKS */
+        .tips-list {
+            font-size: 1.5rem;
+            width: 60%;
+            margin: auto;
+            margin-top: 30px;
+            line-height: 2.2rem;
+        }
+
+        /* ⭐ PUZZLE OF THE DAY */
+        .puzzle-box {
+            background: #f9f9f9;
+            padding: 20px;
+            width: 500px;
+            margin: 30px auto;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid black;
+        }
+
+        .puzzle-box img {
+            width: 300px;
+            margin-top: 15px;
+            border: 2px solid black;
+        }
+
+        .solution-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .solution-text {
+            margin-top: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background pawn container -->
+    <div id="pawn-container"></div>
+
+    <!-- Floating pawns -->
+    <div class="pawn-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg" class="floating-pawn" onclick="goToSection('about')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg" class="floating-pawn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg" class="floating-pawn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg" class="floating-pawn">
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a onclick="goToSection('home')">Home</a></li>
+            <li><a onclick="goToSection('about')">About Me</a></li>
+            <li><a onclick="goToSection('lesson')">Schedule a Lesson</a></li>
+            <li><a onclick="goToSection('scores')">Scores</a></li>
+            <li><a onclick="goToSection('tips')">Tips & Tricks</a></li>
+            <li><a onclick="goToSection('puzzle')">Puzzle of the Day</a></li>
+        </ul>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home" class="page home-screen">
+        <h1 class="main-title">Welcome to Chess Xplained</h1>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="page">
+        <h1 class="title">About Me</h1>
+        <p class="placeholder">
+            Hello, and welcome to my website! I’m really glad you’re here. I built this entire site during a summer camp in 2026, and it’s been an awesome project to work on. My name is Owen Li, and chess has been one of my biggest passions for as long as I can remember. Whether you’re here to learn, explore, or just look around, I hope you enjoy your time on Chess Xplained. Have fun!
+        </p>
+    </section>
+
+    <!-- SCHEDULE A LESSON -->
+    <section id="lesson" class="page">
+        <h1 class="title">Schedule a Lesson</h1>
+
+        <div class="info-box">
+            <p><strong>Phone:</strong> 832-388-1332</p>
+            <p><strong>Email:</strong> owenlchess@gmail.com</p>
+            <p class="price-box"><strong>Pricing:</strong> $20 per hour</p>
+        </div>
+
+        <div class="quote-box">
+            <h2>Quote of the Day</h2>
+            <p id="daily-quote"></p>
+            <p id="extra-quote" class="extra-quote"></p>
+        </div>
+    </section>
+
+    <!-- SCORES -->
+    <section id="scores" class="page">
+        <h1 class="title">Scores</h1>
+
+        <h2 class="category">World Chess Championship</h2>
+        <ul class="list">
+            <li>2010 – Viswanathan Anand (4–2)</li>
+            <li>2012 – Viswanathan Anand (2.5–1.5)</li>
+            <li>2013 – Magnus Carlsen (6.5–3.5)</li>
+            <li>2014 – Magnus Carlsen (6.5–4.5)</li>
+            <li>2016 – Magnus Carlsen (9–7)</li>
+            <li>2018 – Magnus Carlsen (9–5)</li>
 
